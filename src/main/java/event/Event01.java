@@ -11,7 +11,7 @@ public class Event01 {
     }
 
     public void lookJeramiah() {
-        gm.ui.messageText.setText("This is your handsome roommate Jeramiah");
+        gm.ui.messageText.setText("This is your tall handsome roommate Jeramiah. (He works on cars. Specifically Hondas)");
     }
     public void talkJeramiah() {
         gm.ui.messageText.setText("Did you hear that noise outside son?");

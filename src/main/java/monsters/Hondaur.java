@@ -5,7 +5,7 @@ import main.GameManager;
 public class Hondaur extends Monster {
 
     public Hondaur(GameManager gm) {
-        super(gm,3, "Hondaur", 1);
+        super(gm,4, "Hondaur", 1);
     }
     public void addToScene() {
 
@@ -16,7 +16,7 @@ public class Hondaur extends Monster {
 
     @Override
     public void lookHondaur() {
-        gm.ui.messageText.setText("You see a fearsome " + monster+ " ready to rev its engine.");
+        gm.ui.messageText.setText("You see a fearsome weakened " + monster+ " ready to rev its engine.");
     }
     @Override
     public void talkHondaur() {
@@ -26,12 +26,17 @@ public class Hondaur extends Monster {
     public void attackHondaur() {
 
         currentLife--;
-        gm.ui.messageText.setText("You attack the "+monster+" ! Its health decreases.");
-        if(gm.player.playerLife != 0){
-            gm.player.playerLife -= 1;
-            gm.player.updatePlayerStatus();
+        gm.player.playerLife -=1;
+        gm.player.updatePlayerStatus();
+        gm.ui.messageText.setText("You attack the "+monster+" with your fists! (Its health decreases)");
+        if(gm.player.playerLife <=0){
+            gm.sChanger.showGameOverScreen(3);
+            gm.ui.messageText.setText("You baka!");
+        }
+        else{
             gm.ui.messageText.setText("You lost a life! Be careful!");
         }
+
         if(currentLife == 0){
             gm.ui.createObject(3, 340,100,200,233,"blood.png",
                     "","", "", "",
@@ -41,9 +46,6 @@ public class Hondaur extends Monster {
                     "talkAnthony", "touchAnthony");
 
             gm.ui.messageText.setText("The " + monster+ " has been defeated!");
-        }
-        else{
-            gm.ui.messageText.setText("You have attacked the "+monster+ "\nKeep attacking it's almost dead!");
         }
     }
 
@@ -64,8 +66,8 @@ public class Hondaur extends Monster {
     public void talkAnthony() {
         gm.ui.messageText.setText("Yoooo did you kill THE "+monster+"?? My clan has been hunting it down for years!");
     }
-        @Override
-        public void touchAnthony() {
-            gm.ui.messageText.setText("*You grasp his cheek. He sheds a tear* Thank you for your service! Here's a Glock. My boy Denzel should be up ahead!");
-        }
+    @Override
+    public void touchAnthony() {
+        gm.ui.messageText.setText("*You grasp his cheek. He sheds a tear* My boy Denzel should be up ahead!");
+    }
 }

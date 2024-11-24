@@ -79,6 +79,17 @@ public class ActionHandler implements EventHandler<ActionEvent> {
             case "touchAnthony":
                 gm.hondaur.touchAnthony();
                 break;
+            //SCENE4
+            case "lookDenzel":
+                gm.ev4.lookDenzel();
+                break;
+            case "talkDenzel":
+                gm.ev4.talkDenzel();
+                break;
+            case "restDenzel":
+                gm.ev4.restDenzel();
+                break;
+
 
 
             // SCENE CHANGES
@@ -94,9 +105,22 @@ public class ActionHandler implements EventHandler<ActionEvent> {
                 }
                 break;
             case "goScene3":
-                if(gm.player.hasFlashlight == 1){
-                    gm.sChanger.showScene3();
+                gm.sChanger.showScene3();
+                break;
+            case "goScene4":
+                if(gm.hondaur.currentLife == 0){
+                    gm.sChanger.showScene4();
                 }
+                else {
+                    gm.ui.messageText.setText("You must beat the crap outta the Hondaur to proceed!");
+                }
+                break;
+
+
+            case "restart":
+                gm.sChanger.exitGameOverScreen();
+                gm.sChanger.showScene1();
+                gm.startGameTimer();
                 break;
         }
     }

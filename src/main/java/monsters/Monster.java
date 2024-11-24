@@ -5,7 +5,7 @@ import main.GameManager;
 public abstract class Monster {
 
     protected GameManager gm;
-    protected int currentLife;
+    public int currentLife;
     protected String monster;
     protected int attackDamage;
 

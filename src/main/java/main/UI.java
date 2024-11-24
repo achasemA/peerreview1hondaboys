@@ -22,10 +22,15 @@ public class UI {
     public TextArea messageText;
     public Pane[] bgPane = new Pane[10];
     ImageView[] bgImageView = new ImageView[10];
-    ImageView[] lifeLabels = new ImageView[5];
+    public Label timerLabel;
 
     // PLAYER UI
     public Label flashlightLabel, pistolLabel, ak47Label;
+    ImageView[] lifeLabels = new ImageView[5];
+
+    //GAME OVER UI
+    public Label titleLabel;
+    public Button restartButton;
 
     public UI(GameManager gm) {
         this.gm = gm;
@@ -60,6 +65,13 @@ public class UI {
         // Add the TextArea to the root Pane
         root.getChildren().add(messageText);
 
+        //Timer Label
+        timerLabel = new Label("Time: 00:00");
+        timerLabel.setStyle("-fx-font-family: 'Arial'; -fx-font-size: 24px; -fx-text-fill: white;");
+        timerLabel.setLayoutX((double) (800 - 100) / 2); // Center horizontally (approximate for 100px width)
+        timerLabel.setLayoutY(10);
+        root.getChildren().add(timerLabel);
+
         // Create and set the Scene
         Scene scene = new Scene(root, 800, 600);
         window.setScene(scene); // Set the scene to the primary stage
@@ -71,6 +83,7 @@ public class UI {
         bgPane[bgNum].setPrefSize(700, 350);
         bgPane[bgNum].setLayoutX(50);
         bgPane[bgNum].setLayoutY(50);
+        bgPane[bgNum].setVisible(false);
 
         // Background Image
         Image bgImage = new Image(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(bgFileName)));
@@ -176,8 +189,36 @@ public class UI {
         ak47Label.setVisible(false); // Hide initially
         inventoryPanel.getChildren().add(ak47Label);
 
-        Pane root = (Pane) window.getScene().getRoot(); // Assuming you are using a Pane as the root
-        root.getChildren().addAll(background, lifePanel, inventoryPanel); // Add background and lifePanel to the root
+        Pane root = (Pane) window.getScene().getRoot();
+        root.getChildren().addAll(background, lifePanel, inventoryPanel);
+    }
+
+    public void createGameOverField() {
+
+        // Title Label
+        titleLabel = new Label("");
+        titleLabel.setLayoutX(200);
+        titleLabel.setLayoutY(150);
+        titleLabel.setTextFill(Color.RED);
+        titleLabel.setStyle("-fx-font-family: 'Times New Roman'; -fx-font-size: 70px;");
+        titleLabel.setVisible(false);
+
+        // Restart Button
+        restartButton = new Button("Restart");
+        restartButton.setLayoutX(340);
+        restartButton.setLayoutY(320);
+        restartButton.setStyle("-fx-background-color: transparent; -fx-text-fill: white; -fx-border-color: transparent;");
+        restartButton.setFocusTraversable(false);
+        restartButton.setOnAction(e -> gm.aHandler.handleAction("restart"));
+        restartButton.setVisible(false);
+
+        // Add to root
+        Pane root = (Pane) window.getScene().getRoot();
+        titleLabel.layoutXProperty().bind(root.widthProperty().subtract(titleLabel.widthProperty()).divide(2));
+        titleLabel.layoutYProperty().bind(root.heightProperty().subtract(titleLabel.heightProperty()).divide(2).subtract(50)); // Adjust offset as needed
+        restartButton.layoutXProperty().bind(root.widthProperty().subtract(restartButton.widthProperty()).divide(2));
+        restartButton.layoutYProperty().bind(root.heightProperty().subtract(restartButton.heightProperty()).divide(2).add(50)); // Adjust offset as needed
+        root.getChildren().addAll(titleLabel, restartButton);
     }
 
     public void generateScene() {
@@ -200,5 +241,11 @@ public class UI {
         createBackground(3,"woods.png");
         gm.hondaur.addToScene();
         gm.engineStealerMonster.addToScene();
+        createArrowButton(3, 650, 150, 50, 50, "rightArrow50x50.png", "goScene4");
+        //SCENE4
+        createBackground(4,"campfire.png");
+        createObject(4, 100,100, 200,250,"denzel.png"
+                , "Look", "Talk","Rest","lookDenzel",
+                "talkDenzel","restDenzel");
     }
 }
