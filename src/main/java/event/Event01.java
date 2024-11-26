@@ -15,6 +15,7 @@ public class Event01 {
     }
     public void talkJeramiah() {
         gm.ui.messageText.setText("Did you hear that noise outside son?");
+        gm.playSE(gm.engineNoise);
     }
     public void restJeramiah() {
 
@@ -22,9 +23,12 @@ public class Event01 {
             gm.ui.messageText.setText("Come here my baka! \n*You lay in Jeramiah's strong arms*\n(Your life has been recovered)");
             gm.player.playerLife++;
             gm.player.updatePlayerStatus();
+            gm.playSE(gm.heal);
+            gm.playSE(gm.awSound);
         }
         else{
             gm.ui.messageText.setText("(Your life is full)");
+            gm.playSE(gm.cannotSound);
 
         }
 
@@ -38,9 +42,11 @@ public class Event01 {
             gm.ui.messageText.setText("(You obtained a flashlight)");
 
             gm.player.updatePlayerStatus();
+            gm.playSE(gm.flashlightSwitch);
         }
         else{
             gm.ui.messageText.setText("(You already have a flashlight)");
+            gm.playSE(gm.cannotSound);
         }
 
     }
@@ -53,6 +59,7 @@ public class Event01 {
         }
         else{
             gm.ui.messageText.setText("(You don't have a flashlight)");
+            gm.playSE(gm.cannotSound);
         }
 
     }

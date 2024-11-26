@@ -79,7 +79,7 @@ public class ActionHandler implements EventHandler<ActionEvent> {
             case "touchAnthony":
                 gm.hondaur.touchAnthony();
                 break;
-            //SCENE4
+            //SCENE 4
             case "lookDenzel":
                 gm.ev4.lookDenzel();
                 break;
@@ -89,8 +89,81 @@ public class ActionHandler implements EventHandler<ActionEvent> {
             case "restDenzel":
                 gm.ev4.restDenzel();
                 break;
-
-
+            //SCENE 5
+            case "lookHondaTrunk":
+                gm.ev5.lookHondaTrunk();
+                break;
+            case "talkHondaTrunk":
+                gm.ev5.talkHondaTrunk();
+                break;
+            case "killHondaTrunk":
+                gm.ev5.killHondaTrunk();
+                break;
+            case "lookTheodoor":
+                gm.theodoor.lookTheodoor();
+                break;
+            case "talkTheodoor":
+                gm.theodoor.talkTheodoor();
+                break;
+            case "attackTheodoor":
+                gm.theodoor.attackTheodoor();
+                break;
+            case "lookWheeler":
+                gm.wheeler.lookWheeler();
+                break;
+            case "talkWheeler":
+                gm.wheeler.talkWheeler();
+                break;
+            case "attackWheeler":
+                gm.wheeler.attackWheeler();
+                break;
+            //SCENE 6
+            case "lookBrandon":
+                gm.ev6.lookBrandon();
+                break;
+            case "talkBrandon":
+                gm.ev6.talkBrandon();
+                break;
+            case "restBrandon":
+                gm.ev6.restBrandon();
+                break;
+            case "lookDenzel2":
+                gm.ev6.lookDenzel();
+                break;
+            case "talkDenzel2":
+                gm.ev6.talkDenzel();
+                break;
+            case "playDenzel":
+                gm.ev6.playDenzel();
+                break;
+            //SCENE 7
+            case "lookJulian":
+                gm.ev7.lookJulian();
+                break;
+            case "talkJulian":
+                gm.ev7.talkJulian();
+                break;
+            case "holdJulian":
+                gm.ev7.holdJulian();
+                break;
+            case "lookSlotMachine":
+                gm.ev7.lookSlotMachine();
+                break;
+            case "talkSlotMachine":
+                gm.ev7.talkSlotMachine();
+                break;
+            case "spinSlotMachine":
+                gm.ev7.spinSlotMachine();
+                break;
+            case "lookAdrian":
+                gm.ev7.lookAdrian();
+                break;
+            case "talkAdrian":
+                gm.ev7.talkAdrian();
+                break;
+            case "thankAdrian":
+                gm.ev7.thankAdrian();
+                break;
 
             // SCENE CHANGES
             case "goScene1":
@@ -102,6 +175,7 @@ public class ActionHandler implements EventHandler<ActionEvent> {
                 }
                 else {
                     gm.ui.messageText.setText("It's dark outside! You need a flashlight");
+                    gm.playSE(gm.cannotSound);
                 }
                 break;
             case "goScene3":
@@ -113,9 +187,30 @@ public class ActionHandler implements EventHandler<ActionEvent> {
                 }
                 else {
                     gm.ui.messageText.setText("You must beat the crap outta the Hondaur to proceed!");
+                    gm.playSE(gm.cannotSound);
                 }
                 break;
-
+            case "goScene5":
+                if(gm.player.hasPistol == 1){
+                    gm.sChanger.showScene5();
+                }
+                else {
+                    gm.ui.messageText.setText("You should get the glock from Denzel!");
+                    gm.playSE(gm.cannotSound);
+                }
+                break;
+            case "goScene6":
+                if(gm.theodoor.currentLife == 0 && gm.wheeler.currentLife == 0){
+                    gm.sChanger.showScene6();
+                }
+                else{
+                    gm.ui.messageText.setText("You must kill the monsters first!");
+                    gm.playSE(gm.cannotSound);
+                }
+                break;
+            case "goScene7":
+                gm.sChanger.showScene7();
+                break;
 
             case "restart":
                 gm.sChanger.exitGameOverScreen();

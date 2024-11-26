@@ -36,9 +36,56 @@ public class UI {
         this.gm = gm;
     }
 
+    public void createTitleScreen(Stage primaryStage) {
+        // Window setup
+        this.window = primaryStage;
+        window.setTitle("Engine Of Desolation");
+        window.setWidth(800);
+        window.setHeight(600);
+
+        // Create the root pane for the title screen
+        Pane root = new Pane();
+        root.setStyle("-fx-background-color: black;");
+
+        // Background Image
+        ImageView backgroundImage = new ImageView(
+                new Image(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("titleScreen.png")))
+        );
+        backgroundImage.setFitWidth(800);
+        backgroundImage.setFitHeight(600);
+        backgroundImage.setPreserveRatio(false);
+
+        //START BUTTON
+        Button startButton = new Button("Start");
+        startButton.setStyle("-fx-font-family: 'Arial'; -fx-font-size: 24px; -fx-background-color: white;");
+        startButton.setLayoutX((800 - 150) / 2); // Center horizontally (approximate for button width)
+        startButton.setLayoutY((600 - 50) / 2);  // Center vertically (approximate for button height)
+
+        // Start button functionality
+        startButton.setOnAction(e -> {
+            // Transition to the main game screen
+            createMainField(window);
+            createPlayerField();
+            createGameOverField();
+            gm.player.setPlayerDefaultStatus();
+            generateScene();
+            gm.sChanger.showScene1();
+            gm.startGameTimer();
+
+        });
+
+        // Add components to root
+        root.getChildren().addAll(backgroundImage, startButton);
+
+        // Create and set the scene
+        Scene titleScene = new Scene(root, 800, 600);
+        window.setScene(titleScene);
+        window.show();
+    }
+
     public void createMainField(Stage primaryStage) {
         this.window = primaryStage;
-        window.setTitle("Game Window");
+        window.setTitle("Engine Of Desolation");
         window.setWidth(800);
         window.setHeight(600);
 
@@ -125,6 +172,36 @@ public class UI {
 
         bgPane[bgNum].getChildren().add(objectImageView);
     }
+//To help objects appear and disappear when game is restarted
+    public ImageView createObjectAndReturn(int bgNum, int objx, int objy, int objWidth, int objHeight, String objFileName,
+                                           String choice1Name, String choice2Name, String choice3Name, String choice1Command, String choice2Command, String choice3Command) {
+        ContextMenu contextMenu = new ContextMenu();
+        MenuItem choice1 = new MenuItem(choice1Name);
+        MenuItem choice2 = new MenuItem(choice2Name);
+        MenuItem choice3 = new MenuItem(choice3Name);
+
+        choice1.setOnAction(e -> gm.aHandler.handleAction(choice1Command));
+        choice2.setOnAction(e -> gm.aHandler.handleAction(choice2Command));
+        choice3.setOnAction(e -> gm.aHandler.handleAction(choice3Command));
+
+        contextMenu.getItems().addAll(choice1, choice2, choice3);
+
+        Image objectImage = new Image(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(objFileName)));
+        ImageView objectImageView = new ImageView(objectImage);
+        objectImageView.setFitWidth(objWidth);
+        objectImageView.setFitHeight(objHeight);
+        objectImageView.setLayoutX(objx);
+        objectImageView.setLayoutY(objy);
+
+        objectImageView.setOnMousePressed(e -> {
+            if (e.getButton() == MouseButton.SECONDARY) {
+                contextMenu.show(objectImageView, e.getScreenX(), e.getScreenY());
+            }
+        });
+
+        bgPane[bgNum].getChildren().add(objectImageView);
+        return objectImageView; // Return the created ImageView
+    }
 
     public void createArrowButton(int bgNum, int x, int y, int width, int height, String arrowFileName, String command) {
         // Arrow Button Image
@@ -163,27 +240,27 @@ public class UI {
         HBox inventoryPanel = new HBox();
         inventoryPanel.setLayoutX(590);
         inventoryPanel.setLayoutY(0);
-        inventoryPanel.setSpacing(10); // Similar to GridLayout in Java Swing
+        inventoryPanel.setSpacing(10);
         inventoryPanel.setPrefWidth(150);
         inventoryPanel.setPrefHeight(50);
         inventoryPanel.setStyle("-fx-background-color: black;");
 
         // Initialize and assign flashlightLabel
-        Image flashlightImage = new Image(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("flashlight (1).png")));
+        Image flashlightImage = new Image(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("flashlightIcon.png")));
         flashlightLabel = new Label(); // Assign to flashlightLabel
         flashlightLabel.setGraphic(new ImageView(flashlightImage));
         flashlightLabel.setVisible(false); // Hide initially
         inventoryPanel.getChildren().add(flashlightLabel);
 
         // Initialize and assign pistolLabel
-        Image pistolImage = new Image(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("pistol-gun (1).png")));
+        Image pistolImage = new Image(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("pistol.png")));
         pistolLabel = new Label(); // Assign to pistolLabel
         pistolLabel.setGraphic(new ImageView(pistolImage));
         pistolLabel.setVisible(false); // Hide initially
         inventoryPanel.getChildren().add(pistolLabel);
 
         // Initialize and assign ak47Label
-        Image ak47Image = new Image(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("ak47 (1).png")));
+        Image ak47Image = new Image(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("ak47.png")));
         ak47Label = new Label(); // Assign to ak47Label
         ak47Label.setGraphic(new ImageView(ak47Image));
         ak47Label.setVisible(false); // Hide initially
@@ -236,16 +313,41 @@ public class UI {
         createObject(2, 350, 230, 200, 151, "honda200x151.png",
                 "Search Inside", "Search hood", "Rest",
                 "search1Honda", "search2Honda", "restHonda");
-        createArrowButton(2, 650, 150, 50, 50, "rightArrow50x50.png", "goScene3");
-        //SCENE 3
+        // SCENE 3
         createBackground(3,"woods.png");
         gm.hondaur.addToScene();
         gm.engineStealerMonster.addToScene();
         createArrowButton(3, 650, 150, 50, 50, "rightArrow50x50.png", "goScene4");
-        //SCENE4
+        // SCENE 4
         createBackground(4,"campfire.png");
         createObject(4, 100,100, 200,250,"denzel.png"
                 , "Look", "Talk","Rest","lookDenzel",
                 "talkDenzel","restDenzel");
+        createArrowButton(4, 650, 150, 50, 50, "rightArrow50x50.png", "goScene5");
+        // SCENE 5
+        createBackground(5,"woods2.png");
+        createObject(5, 250,150, 200,200,"hondaTrunk.png"
+                , "Look", "Talk","Kill","lookHondaTrunk",
+                "talkHondaTrunk","killHondaTrunk");
+        createArrowButton(5, 650, 150, 50, 50, "rightArrow50x50.png", "goScene6");
+        gm.theodoor.addToScene();
+        gm.wheeler.addToScene();
+        // SCENE 6
+        createBackground(6, "casinoEntrance.png");
+        createObject(6, 80, 140, 200, 250, "brandon.png",
+                "Look", "Talk", "Rest",
+                "lookBrandon", "talkBrandon", "restBrandon");
+        createArrowButton(6, 650, 150, 50, 50, "rightArrow50x50.png", "goScene7");
+        // SCENE 7
+        createBackground(7, "casino.png");
+        createObject(7, 200, 130, 200, 224, "julian.png",
+                "Look", "Talk", "Hold",
+                "lookJulian", "talkJulian", "holdJulian");
+        createObject(7, 350, 30, 300, 354, "slotMachine.png",
+                "Look", "Talk", "Spin",
+                "lookSlotMachine", "talkSlotMachine", "spinSlotMachine");
+        createObject(7, 80, 50, 225, 300, "adrian.png",
+                "Look", "Talk", "Thank",
+                "lookAdrian", "talkAdrian", "thankAdrian");
     }
 }

@@ -21,9 +21,11 @@ public class Event02 {
             gm.ui.messageText.setText("*You rest on the hood of your car*\n(Your life has been recovered)");
             gm.player.playerLife++;
             gm.player.updatePlayerStatus();
+            gm.playSE(gm.heal);
         }
         else{
             gm.ui.messageText.setText("(Your life is full)");
+            gm.playSE(gm.cannotSound);
 
         }
     }

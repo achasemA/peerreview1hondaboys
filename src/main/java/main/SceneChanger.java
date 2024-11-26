@@ -15,7 +15,13 @@ public class SceneChanger {
         gm.ui.bgPane[2].setVisible(false);
         gm.ui.bgPane[3].setVisible(false);
         gm.ui.bgPane[4].setVisible(false);
+        gm.ui.bgPane[5].setVisible(false);
+        gm.ui.bgPane[6].setVisible(false);
         gm.ui.messageText.setText("You are inside your room and you hear a sus sound outside");
+
+        gm.stopMusic(gm.currentMusic);
+        gm.currentMusic = gm.mainTheme;
+        gm.playMusic(gm.currentMusic);
     }
     public void showScene2(){
 
@@ -23,6 +29,8 @@ public class SceneChanger {
         gm.ui.bgPane[2].setVisible(true);
         gm.ui.bgPane[3].setVisible(false);
         gm.ui.bgPane[4].setVisible(false);
+        gm.ui.bgPane[5].setVisible(false);
+        gm.ui.bgPane[6].setVisible(false);
         gm.ui.messageText.setText("You are outside your house");
     }
     public void showScene3(){
@@ -30,14 +38,66 @@ public class SceneChanger {
         gm.ui.bgPane[2].setVisible(false);
         gm.ui.bgPane[3].setVisible(true);
         gm.ui.bgPane[4].setVisible(false);
+        gm.ui.bgPane[5].setVisible(false);
+        gm.ui.bgPane[6].setVisible(false);
         gm.ui.messageText.setText("The Engine Monster Stealer gets away and you find yourself lost in the woods");
+
+        gm.stopMusic(gm.currentMusic);
+        gm.currentMusic = gm.monsterTheme;
+        gm.playMusic(gm.currentMusic);
     }
     public void showScene4() {
         gm.ui.bgPane[1].setVisible(false);
         gm.ui.bgPane[2].setVisible(false);
         gm.ui.bgPane[3].setVisible(false);
         gm.ui.bgPane[4].setVisible(true);
+        gm.ui.bgPane[5].setVisible(false);
+        gm.ui.bgPane[6].setVisible(false);
         gm.ui.messageText.setText("You find a tall, dark, and handsome man");
+
+        gm.stopMusic(gm.currentMusic);
+        gm.currentMusic = gm.mainTheme;
+        gm.playMusic(gm.currentMusic);
+    }
+    public void showScene5() {
+        gm.ui.bgPane[1].setVisible(false);
+        gm.ui.bgPane[2].setVisible(false);
+        gm.ui.bgPane[3].setVisible(false);
+        gm.ui.bgPane[4].setVisible(false);
+        gm.ui.bgPane[5].setVisible(true);
+        gm.ui.bgPane[6].setVisible(false);
+        gm.ui.messageText.setText("The Casino is up ahead but 2 monsters block your way!");
+
+        gm.stopMusic(gm.currentMusic);
+        gm.currentMusic = gm.monsterTheme;
+        gm.playMusic(gm.currentMusic);
+    }
+    public void showScene6() {
+        gm.ui.bgPane[1].setVisible(false);
+        gm.ui.bgPane[2].setVisible(false);
+        gm.ui.bgPane[3].setVisible(false);
+        gm.ui.bgPane[4].setVisible(false);
+        gm.ui.bgPane[5].setVisible(false);
+        gm.ui.bgPane[6].setVisible(true);
+        gm.ui.messageText.setText("You followed the sound of havoc and made your way to the Casino");
+
+        gm.stopMusic(gm.currentMusic);
+        gm.currentMusic = gm.mainTheme;
+        gm.playMusic(gm.currentMusic);
+    }
+    public void showScene7() {
+        gm.ui.bgPane[1].setVisible(false);
+        gm.ui.bgPane[2].setVisible(false);
+        gm.ui.bgPane[3].setVisible(false);
+        gm.ui.bgPane[4].setVisible(false);
+        gm.ui.bgPane[5].setVisible(false);
+        gm.ui.bgPane[6].setVisible(false);
+        gm.ui.bgPane[7].setVisible(true);
+        gm.ui.messageText.setText("You enter the Casino but its too late");
+
+        gm.stopMusic(gm.currentMusic);
+        gm.currentMusic = gm.casinoMusic;
+        gm.playMusic(gm.currentMusic);
     }
     public void showGameOverScreen(int currentBgNum){
 
@@ -47,11 +107,20 @@ public class SceneChanger {
             gm.ui.restartButton.setVisible(true);
             gm.ui.restartButton.setText("Click Here To Restart");
             gm.stopGameTimer();
+
+            gm.stopMusic(gm.currentMusic);
+
+            gm.playSE(gm.gameOverSound);
+            gm.playSE(gm.gameOverVoice);
         }
     public void exitGameOverScreen(){
 
         gm.ui.titleLabel.setVisible(false);
         gm.ui.restartButton.setVisible(false);
+        gm.hondaur.reset();
+        gm.theodoor.reset();
+        gm.wheeler.reset();
+        gm.ev6.reset();
         gm.player.setPlayerDefaultStatus();
     }
 
