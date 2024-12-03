@@ -80,7 +80,7 @@ public class UI {
         Button startButton = new Button("Start");
         startButton.setStyle("-fx-font-family: 'Arial'; -fx-font-size: 24px; -fx-background-color: white;");
         startButton.setLayoutX((800 - 150) / 2); // Center horizontally (approximate for button width)
-        startButton.setLayoutY((600 - 50) / 2);  // Center vertically (approximate for button height)
+        startButton.setLayoutY(400);  // Center vertically (approximate for button height)
 
         // Start button functionality
         startButton.setOnAction(e -> {
