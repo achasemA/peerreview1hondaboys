@@ -99,6 +99,39 @@ public class SceneChanger {
         gm.currentMusic = gm.casinoMusic;
         gm.playMusic(gm.currentMusic);
     }
+    public void showScene8() {
+        gm.ui.bgPane[1].setVisible(false);
+        gm.ui.bgPane[2].setVisible(false);
+        gm.ui.bgPane[3].setVisible(false);
+        gm.ui.bgPane[4].setVisible(false);
+        gm.ui.bgPane[5].setVisible(false);
+        gm.ui.bgPane[6].setVisible(false);
+        gm.ui.bgPane[7].setVisible(false);
+        gm.ui.bgPane[8].setVisible(true);
+        gm.ui.messageText.setText("You catch up to the monster");
+
+        gm.stopMusic(gm.currentMusic);
+        gm.currentMusic = gm.monsterTheme;
+        gm.playMusic(gm.currentMusic);
+    }
+    public void viewLeaderboard() {
+        gm.ui.bgPane[1].setVisible(false);
+        gm.ui.bgPane[2].setVisible(false);
+        gm.ui.bgPane[3].setVisible(false);
+        gm.ui.bgPane[4].setVisible(false);
+        gm.ui.bgPane[5].setVisible(false);
+        gm.ui.bgPane[6].setVisible(false);
+        gm.ui.bgPane[7].setVisible(false);
+        gm.ui.bgPane[8].setVisible(false);
+        gm.ui.bgPane[9].setVisible(true);
+
+        gm.showLeaderboard();
+        gm.stopMusic(gm.currentMusic);
+        gm.currentMusic = gm.mainTheme;
+        gm.playMusic(gm.currentMusic);
+        gm.ui.messageText.setText("Congrats! You won!");
+
+    }
     public void showGameOverScreen(int currentBgNum){
 
             gm.ui.bgPane[currentBgNum].setVisible(false);
@@ -121,6 +154,7 @@ public class SceneChanger {
         gm.theodoor.reset();
         gm.wheeler.reset();
         gm.ev6.reset();
+        gm.engineStealerMonster.reset();
         gm.player.setPlayerDefaultStatus();
     }
 

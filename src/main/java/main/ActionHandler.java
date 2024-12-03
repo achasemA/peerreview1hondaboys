@@ -164,6 +164,15 @@ public class ActionHandler implements EventHandler<ActionEvent> {
             case "thankAdrian":
                 gm.ev7.thankAdrian();
                 break;
+            case "talkSponge2":
+                gm.engineStealerMonster.talkSponge2();
+                break;
+            case "attackSponge":
+                gm.engineStealerMonster.attackSponge();
+                break;
+            case "letliveSponge":
+                gm.engineStealerMonster.letLiveSponge();
+                break;
 
             // SCENE CHANGES
             case "goScene1":
@@ -211,7 +220,22 @@ public class ActionHandler implements EventHandler<ActionEvent> {
             case "goScene7":
                 gm.sChanger.showScene7();
                 break;
-
+            case "goScene8":
+                if(gm.ev7.julianLife == 0){
+                    gm.sChanger.showScene8();
+                }
+                else {
+                    gm.ui.messageText.setText("You need to spin the slot machine first!");
+                }
+                break;
+            case "goLeaderboard":
+                if(gm.engineStealerMonster.currentLife == 0) {
+                    gm.sChanger.viewLeaderboard();
+                }
+                else{
+                    gm.ui.messageText.setText("You must kill or let the monster live to proceed!");
+                }
+                break;
             case "restart":
                 gm.sChanger.exitGameOverScreen();
                 gm.sChanger.showScene1();

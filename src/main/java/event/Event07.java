@@ -5,7 +5,7 @@ import main.GameManager;
 public class Event07 {
 
     GameManager gm;
-    private int julianLife = 2;
+    public int julianLife = 2;
 
     public Event07(GameManager gm) {
 

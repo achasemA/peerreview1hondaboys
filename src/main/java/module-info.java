@@ -11,6 +11,12 @@ module EngineOfDesolation {
     requires google.http.client.jackson2;
     requires google.api.client;
 
+    requires org.testfx.junit5;
+    requires org.testfx;
+    //requires junit;
+
+    //opens com.yourpackage to javafx.graphics, javafx.fxml, org.testfx;
+
     exports main to javafx.graphics;
 
 }

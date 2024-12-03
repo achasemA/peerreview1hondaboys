@@ -10,6 +10,7 @@ import monsters.Theodoor;
 import monsters.Wheeler;
 
 import java.net.URL;
+import java.util.List;
 
 public class GameManager extends Application {
 
@@ -19,8 +20,9 @@ public class GameManager extends Application {
     public SceneChanger sChanger = new SceneChanger(this);
 
     private long startTime;
-    private AnimationTimer gameTimer;
-    private long elapsedTime;
+    public AnimationTimer gameTimer;
+    public long elapsedTime;
+    private TimeManager timeManager;
 
     public Event01 ev1 = new Event01(this);
     public Event02 ev2 = new Event02(this);
@@ -67,6 +69,7 @@ public class GameManager extends Application {
         playMusic(currentMusic);
 
         ui.createTitleScreen(primaryStage);
+        timeManager = new TimeManager();
 
     }
 
@@ -103,9 +106,14 @@ public class GameManager extends Application {
         if (gameTimer != null) {
             gameTimer.stop();
         }
+        // Check if the monster is defeated and save the time
+        if (engineStealerMonster.currentLife == 0) {
+            timeManager.addTime(elapsedTime);
+            ui.messageText.setText("Your time: " + TimeManager.TimeUtils.formatTime(elapsedTime));
+        }
     }
 
-    private void updateTimerUI() {
+    public void updateTimerUI() {
         // Format the time as minutes and seconds
         long seconds = elapsedTime / 1000;
         long minutes = seconds / 60;
@@ -113,5 +121,9 @@ public class GameManager extends Application {
 
         // Display the timer on the UI
         ui.timerLabel.setText(String.format("%02d:%02d", minutes, seconds));
+    }
+    public void showLeaderboard() {
+        List<String> leaderboard = timeManager.getFormattedFastestTimes();
+        ui.displayLeaderboard(leaderboard); // Add a method in UI to display the leaderboard
     }
 }

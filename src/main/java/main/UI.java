@@ -1,5 +1,8 @@
 package main;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -12,16 +15,20 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
+import java.util.List;
 import java.util.Objects;
 
 public class UI {
     GameManager gm;
     Stage window;
     public TextArea messageText;
-    public Pane[] bgPane = new Pane[10];
-    ImageView[] bgImageView = new ImageView[10];
+    public Pane[] bgPane = new Pane[11];
+    ImageView[] bgImageView = new ImageView[11];
     public Label timerLabel;
 
     // PLAYER UI
@@ -55,6 +62,20 @@ public class UI {
         backgroundImage.setFitHeight(600);
         backgroundImage.setPreserveRatio(false);
 
+        // Floating Text
+        Text floatingText = new Text(80, 200, "Engine Of Desolation");
+        floatingText.setFont(Font.font("Times New Roman", 70));
+        floatingText.setFill(Color.DARKRED);
+
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.ZERO, new KeyValue(floatingText.translateYProperty(), 0)),
+                new KeyFrame(Duration.seconds(2), new KeyValue(floatingText.translateYProperty(), -50))
+        );
+        timeline.setAutoReverse(true);
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+
+
         //START BUTTON
         Button startButton = new Button("Start");
         startButton.setStyle("-fx-font-family: 'Arial'; -fx-font-size: 24px; -fx-background-color: white;");
@@ -75,7 +96,7 @@ public class UI {
         });
 
         // Add components to root
-        root.getChildren().addAll(backgroundImage, startButton);
+        root.getChildren().addAll(backgroundImage, floatingText, startButton);
 
         // Create and set the scene
         Scene titleScene = new Scene(root, 800, 600);
@@ -298,6 +319,20 @@ public class UI {
         root.getChildren().addAll(titleLabel, restartButton);
     }
 
+    public void displayLeaderboard(List<String> leaderboard) {
+        StringBuilder leaderboardText = new StringBuilder("Fastest Times:\n");
+        for (int i = 0; i < leaderboard.size(); i++) {
+            leaderboardText.append((i + 1)).append(". ").append(leaderboard.get(i)).append("\n");
+        }
+
+        // Display the leaderboard in a dialog or a text area
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Leaderboard");
+        alert.setHeaderText("Top 10 Fastest Times");
+        alert.setContentText(leaderboardText.toString());
+        alert.showAndWait();
+    }
+
     public void generateScene() {
         // SCENE 1
         createBackground(1, "bedroom.png");
@@ -316,7 +351,7 @@ public class UI {
         // SCENE 3
         createBackground(3,"woods.png");
         gm.hondaur.addToScene();
-        gm.engineStealerMonster.addToScene();
+        gm.engineStealerMonster.addToScene3();
         createArrowButton(3, 650, 150, 50, 50, "rightArrow50x50.png", "goScene4");
         // SCENE 4
         createBackground(4,"campfire.png");
@@ -349,5 +384,12 @@ public class UI {
         createObject(7, 80, 50, 225, 300, "adrian.png",
                 "Look", "Talk", "Thank",
                 "lookAdrian", "talkAdrian", "thankAdrian");
+        createArrowButton(7, 650, 150, 50, 50, "rightArrow50x50.png", "goScene8");
+        // SCENE 8
+        createBackground(8, "cityStreet.png");
+        gm.engineStealerMonster.addToScene8();
+        createArrowButton(8, 650, 150, 50, 50, "rightArrow50x50.png", "goLeaderboard");
+        // LEADERBOARD SCREEN
+        createBackground(9,"bedroom.png");
     }
 }

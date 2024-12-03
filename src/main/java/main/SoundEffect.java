@@ -23,13 +23,4 @@ public class SoundEffect {
         clip.setFramePosition(0);
         clip.start();
     }
-
-    public void loop(URL name){
-
-        clip.loop(Clip.LOOP_CONTINUOUSLY);
-    }
-
-    public void stop(URL name){
-        clip.stop();
-    }
 }
