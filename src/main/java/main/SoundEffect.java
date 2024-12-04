@@ -1,5 +1,9 @@
 package main;
 
+/**
+ * This class handles the sound effects
+ */
+
 import javax.sound.sampled.*;
 import java.io.IOException;
 import java.net.URL;

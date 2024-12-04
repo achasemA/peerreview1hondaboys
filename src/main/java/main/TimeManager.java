@@ -1,5 +1,9 @@
 package main;
 
+/**
+ * This class handles the leaderboard times
+ */
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;

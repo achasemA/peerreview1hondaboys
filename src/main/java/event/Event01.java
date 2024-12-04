@@ -1,5 +1,9 @@
 package event;
 
+/**
+ * This and all the other event classes handle specific scenes and buttons
+ */
+
 import main.GameManager;
 
 public class Event01 {
