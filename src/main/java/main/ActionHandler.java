@@ -1,4 +1,7 @@
 package main;
+/**
+ * This class gives the buttons an action
+ */
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

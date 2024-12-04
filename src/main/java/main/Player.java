@@ -1,5 +1,8 @@
 package main;
 
+/**
+ * this class handles the player logic
+ */
 public class Player {
 
     GameManager gm;

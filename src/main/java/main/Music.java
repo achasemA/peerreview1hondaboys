@@ -1,4 +1,7 @@
 package main;
+/**
+ * this class handles music
+ */
 
 import javax.sound.sampled.*;
 import java.io.IOException;

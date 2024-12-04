@@ -1,5 +1,9 @@
 package main;
 
+/**
+ * This class handles all the graphics
+ */
+
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;

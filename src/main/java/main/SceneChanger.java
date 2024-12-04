@@ -1,5 +1,8 @@
 package main;
 
+/**
+ * This class handles the transition of scenes
+ */
 public class SceneChanger {
 
     GameManager gm;

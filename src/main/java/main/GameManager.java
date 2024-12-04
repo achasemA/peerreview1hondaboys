@@ -1,4 +1,7 @@
 package main;
+/**
+ * This the main class that handles the game logic
+ */
 
 import event.*;
 import javafx.animation.AnimationTimer;
