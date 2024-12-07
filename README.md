@@ -1,3 +1,5 @@
+This is a point-and-click horror story game.
+
 Prerequisites
 git 2
 maven 3
