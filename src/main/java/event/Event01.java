@@ -3,7 +3,7 @@ package event;
 /**
  * This and all the other event classes handle specific scenes and buttons
  */
-
+//TODO: more javadoc notes to help readability
 import main.GameManager;
 
 public class Event01 {

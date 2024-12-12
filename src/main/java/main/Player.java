@@ -3,6 +3,8 @@ package main;
 /**
  * this class handles the player logic
  */
+// TODO: improve loop readability
+
 public class Player {
 
     GameManager gm;
@@ -53,4 +55,5 @@ public class Player {
         gm.ui.ak47Label.setVisible(hasAk47 == 1);
         }
     }
+    // TODO: add methods for things like if the player is alive, damage, heal
 

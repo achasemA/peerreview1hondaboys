@@ -27,7 +27,7 @@ public class Music {
         clip.setFramePosition(0);
         clip.start();
     }
-
+// TODO: might want to remove 'name', it is not used here
     public void loop(URL name){
 
         clip.loop(Clip.LOOP_CONTINUOUSLY);

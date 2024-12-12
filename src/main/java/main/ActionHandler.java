@@ -2,7 +2,7 @@ package main;
 /**
  * This class gives the buttons an action
  */
-
+//todo:add a readme.md file with the instructions for setup and prereqs for running the game
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 

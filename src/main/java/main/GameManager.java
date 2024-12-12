@@ -2,7 +2,8 @@ package main;
 /**
  * This the main class that handles the game logic
  */
-
+// TODO: Add Javadoc for the "StopGameTimer' method
+// Todo: handle some of the exceptions to prevent some of the crashes
 import event.*;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
